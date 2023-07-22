@@ -3,6 +3,7 @@ console.clear();
 const characterList = document.querySelectorAll('.character');
 let currentPlayer = 1; // Player 1 starts choosing characters
 let selectionComplete = false; // Flag to indicate if both players have chosen characters
+let selectedCharacterP1 = null; // Variable to store the selected character for Player 1
 
 characterList.forEach(character => {
   character.addEventListener('click', () => {
@@ -12,10 +13,18 @@ characterList.forEach(character => {
           document.querySelector('.character.activeP1').classList.remove('activeP1');
         }
         character.classList.add('activeP1');
+        selectedCharacterP1 = character.getAttribute('data-name'); // Store the selected character for Player 1
       } else if (currentPlayer === 2) {
         if (document.querySelector('.character.activeP2')) {
           document.querySelector('.character.activeP2').classList.remove('activeP2');
         }
+
+        // Check if the selected character for Player 2 is the same as Player 1
+        if (character.getAttribute('data-name') === selectedCharacterP1) {
+          console.log('Player 2 cannot choose the same character as Player 1.');
+          return; // Prevent selecting the same character for Player 2
+        }
+
         character.classList.add('activeP2');
       }
     }

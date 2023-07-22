@@ -103,7 +103,7 @@ function animate() {
     }
 
     // detect collision & enemy gets hit
-    if(rectangularCollision({rectangle1: player, rectangle2: enemy}) && player.isAttacking && player.currentFrame === 4){
+    if(rectangularCollision({rectangle1: player, rectangle2: enemy}) && player.isAttacking && player.currentFrame === player.hitPoint){
         enemy.takeHit();
         player.isAttacking = false;
         gsap.to('#enemyHealth', {
@@ -112,11 +112,11 @@ function animate() {
     }
 
     // if player misses
-    if(player.isAttacking && player.currentFrame === 4) {
+    if(player.isAttacking && player.currentFrame === player.hitPoint) {
         player.isAttacking = false
     }
 
-    if(rectangularCollision({rectangle1: enemy, rectangle2: player}) && enemy.isAttacking && enemy.currentFrame === 2){
+    if(rectangularCollision({rectangle1: enemy, rectangle2: player}) && enemy.isAttacking && enemy.currentFrame === enemy.hitPoint){
         player.takeHit();
         enemy.isAttacking = false;
         gsap.to('#playerHealth', {
@@ -125,12 +125,13 @@ function animate() {
     }
 
     // if player misses
-    if(enemy.isAttacking && enemy.currentFrame === 2) {
+    if(enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
         enemy.isAttacking = false
     }    
 
     if(enemy.health <= 0 || player.health <= 0){
         determineWinner({ player, enemy, timerId })
+        setTimeout(() => { window.location.href = 'index.html'; }, 5000);
     }
 }
 

@@ -274,7 +274,8 @@ const characters = {
             },
             width: 150,
             height: 80,
-        }
+        },
+        hitPoint: 4
     },
     
     white_knight : {
@@ -326,7 +327,8 @@ const characters = {
             },
             width: 133,
             height: 80,
-        }
+        },
+        hitPoint: 2
     },
     
     female_hero : {
@@ -378,7 +380,8 @@ const characters = {
             },
             width: 176,
             height: 80,
-        }
+        },
+        hitPoint: 3
     },
     
     huntress : {
@@ -430,7 +433,8 @@ const characters = {
             },
             width: 120,
             height: 80,
-        }
+        },
+        hitPoint: 3
     },
     
     martial_hero : {
@@ -482,7 +486,8 @@ const characters = {
             },
             width: 115,
             height: 50,
-        }
+        },
+        hitPoint: 6
     },
     
     medieval_warrior : {
@@ -534,7 +539,8 @@ const characters = {
             },
             width: 133,
             height: 70,
-        }
+        },
+        hitPoint: 2
     },
     
     hero : {
@@ -586,7 +592,8 @@ const characters = {
             },
             width: 118,
             height: 50,
-        }
+        },
+        hitPoint: 4
     },
     
     fortress : {
@@ -638,7 +645,8 @@ const characters = {
             },
             width: 176,
             height: 50,
-        }
+        },
+        hitPoint: 0
     },
     
     immortal_king : {
@@ -690,7 +698,8 @@ const characters = {
             },
             width: 350,
             height: 70,
-        }
+        },
+        hitPoint: 2
     },
     
     king : {
@@ -742,7 +751,8 @@ const characters = {
             },
             width: 125,
             height: 30,
-        }
+        },
+        hitPoint: 3
     },
 
     nightmare_demon : {
@@ -794,7 +804,8 @@ const characters = {
             },
             width: 110,
             height: 130,
-        }
+        },
+        hitPoint: 7
     },
     
     wizard : {
@@ -846,7 +857,8 @@ const characters = {
             },
             width: 130,
             height: 50,
-        }
+        },
+        hitPoint: 5
     },
 }
 
