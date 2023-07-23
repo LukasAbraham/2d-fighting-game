@@ -23,7 +23,7 @@ function determineWinner({player, enemy, timerId}) {
     })
 }
 
-let timer = 60
+let timer = 20
 let timerId
 function decreaseTimer() {
     if(timer > 0) {
@@ -34,6 +34,7 @@ function decreaseTimer() {
 
     if(timer === 0) {
         determineWinner({player, enemy})
+        // stop character's animation
         player.dead = true;
         enemy.dead = true;
     }

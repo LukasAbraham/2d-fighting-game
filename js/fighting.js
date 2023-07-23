@@ -5,21 +5,19 @@ canvas.width = 1024;
 canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height)
 
-var test = false
-
 const gravity = 0.7
 
 const background = new Sprite({
-        x: 0,
-        y: 0
-    }, { 
+    x: 0,
+    y: 0
+}, {
     imageSrc: './asset/background.png'
 })
 
 const shop = new Sprite({
-        x: 600,
-        y: 128
-    }, {
+    x: 600,
+    y: 128
+}, {
     imageSrc: './asset/shop.png',
     scale: 2.75,
     nframes: 6,
@@ -27,14 +25,14 @@ const shop = new Sprite({
 
 const player = new Fighter({
     x: 0,
-    y: 0    
+    y: 0
 }, characters[player_idx], false);
 
 player.draw();
 
 const enemy = new Fighter({
     x: canvas.width - 50,
-    y: 0    
+    y: 0
 }, characters[enemy_idx], true);
 
 enemy.draw();
@@ -68,18 +66,12 @@ function animate() {
     // c.fillRect(0, 0, canvas.width, canvas.height);
 
     player.update();
-    if(player.hasObject && test) {
-        if(player.object.exist) {
-            player.object.update()
-            console.log(player.object)
-        }
-    }
     enemy.update();
     player.velocity.x = 0;
     enemy.velocity.x = 0;
 
     // player movement
-    if(keys.a.pressed && player.lastKey === 'a') {
+    if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5;
         player.switchSprite('run')
     } else if (keys.d.pressed && player.lastKey === 'd') {
@@ -89,14 +81,14 @@ function animate() {
         player.switchSprite('idle');
     }
 
-    if(player.velocity.y < 0){
+    if (player.velocity.y < 0) {
         player.switchSprite('jump')
     } else if (player.velocity.y > 0) {
         player.switchSprite('fall')
     }
 
     // enemy movement
-    if(keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
+    if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5;
         enemy.switchSprite('run')
     } else if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
@@ -106,14 +98,14 @@ function animate() {
         enemy.switchSprite('idle');
     }
 
-    if(enemy.velocity.y < 0){
+    if (enemy.velocity.y < 0) {
         enemy.switchSprite('jump')
     } else if (enemy.velocity.y > 0) {
         enemy.switchSprite('fall')
     }
 
     // detect collision & enemy gets hit
-    if(rectangularCollision({rectangle1: player, rectangle2: enemy}) && player.isAttacking && player.currentFrame === player.hitPoint){
+    if (rectangularCollision({ rectangle1: player, rectangle2: enemy }) && player.isAttacking && player.currentFrame === player.hitPoint) {
         enemy.takeHit();
         player.isAttacking = false;
         gsap.to('#enemyHealth', {
@@ -122,11 +114,11 @@ function animate() {
     }
 
     // if player misses
-    if(player.isAttacking && player.currentFrame === player.hitPoint) {
+    if (player.isAttacking && player.currentFrame === player.hitPoint) {
         player.isAttacking = false
     }
 
-    if(rectangularCollision({rectangle1: enemy, rectangle2: player}) && enemy.isAttacking && enemy.currentFrame === enemy.hitPoint){
+    if (rectangularCollision({ rectangle1: enemy, rectangle2: player }) && enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
         player.takeHit();
         enemy.isAttacking = false;
         gsap.to('#playerHealth', {
@@ -135,11 +127,11 @@ function animate() {
     }
 
     // if player misses
-    if(enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
+    if (enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
         enemy.isAttacking = false
-    }    
+    }
 
-    if(enemy.health <= 0 || player.health <= 0){
+    if (enemy.health <= 0 || player.health <= 0) {
         determineWinner({ player, enemy, timerId })
     }
 }
@@ -147,7 +139,7 @@ function animate() {
 animate()
 
 window.addEventListener('keydown', (event) => {
-    if(!player.dead) {
+    if (!player.dead) {
         switch (event.key) {
             case 'd':
                 keys.d.pressed = true;
@@ -161,15 +153,16 @@ window.addEventListener('keydown', (event) => {
                 player.velocity.y = -15;
                 break;
             case ' ':
-                if(player.hasObject)
-                    test = true;
                 player.attack();
+                if (player.rangedWeapon) {
+                    player.fired = true;
+                    // console.log(player.object.length)
+                }
                 break;
-    
         }
     }
-    if(!enemy.dead) {
-        switch(event.key) {
+    if (!enemy.dead) {
+        switch (event.key) {
             case 'ArrowRight':
                 keys.ArrowRight.pressed = true;
                 enemy.lastKey = 'ArrowRight';
@@ -183,6 +176,10 @@ window.addEventListener('keydown', (event) => {
                 break;
             case '0':
                 enemy.attack();
+                if (enemy.rangedWeapon) {
+                    enemy.fired = true;
+                    // console.log(enemy.object.length)
+                }
                 break;
         }
     }

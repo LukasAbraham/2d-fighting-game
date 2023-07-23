@@ -647,7 +647,8 @@ const characters = {
             height: 50,
         },
         hitPoint: 0,
-        hasObject: true
+        rangedWeapon: true,
+        subWeaponSrc: './asset/characters/Huntress 2/Static.png'
     },
     
     immortal_king : {
