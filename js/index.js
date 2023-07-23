@@ -5,8 +5,11 @@ let currentPlayer = 1; // Player 1 starts choosing characters
 let selectionComplete = false; // Flag to indicate if both players have chosen characters
 let selectedCharacterP1 = null; // Variable to store the selected character for Player 1
 
+var clickSound = new Audio('../asset/click.mp3')
+
 characterList.forEach(character => {
   character.addEventListener('click', () => {
+    clickSound.play();
     if (!selectionComplete) {
       if (currentPlayer === 1) {
         if (document.querySelector('.character.activeP1')) {
@@ -31,12 +34,15 @@ characterList.forEach(character => {
   });
 });
 
+var lockSound = new Audio('../asset/select.mp3');
+
 window.addEventListener('keydown', event => {
   if (!selectionComplete) {
     if (event.key === ' ') {
       if (currentPlayer === 1) {
         const activeCharacterP1 = document.querySelector('.character.activeP1');
         if (activeCharacterP1) {
+          lockSound.play();
           console.log(`Player 1 selected: ${activeCharacterP1.getAttribute('data-name')}`);
           currentPlayer = 2; // Switch to Player 2
         }
@@ -45,6 +51,7 @@ window.addEventListener('keydown', event => {
       if (currentPlayer === 2) {
         const activeCharacterP2 = document.querySelector('.character.activeP2');
         if (activeCharacterP2) {
+          lockSound.play();
           console.log(`Player 2 selected: ${activeCharacterP2.getAttribute('data-name')}`);
           currentPlayer = 1; // Switch back to Player 1 for the next round
           selectionComplete = true; // All selections are complete
@@ -56,7 +63,7 @@ window.addEventListener('keydown', event => {
 
           // Navigate to the fighting.html page with the character data as query parameters
           const url = `fighting.html?p1=${encodeURIComponent(characterP1)}&p2=${encodeURIComponent(characterP2)}`;
-          window.location.href = url;
+          setTimeout(() => { window.location.href = url; }, 1000);
         }
       }
     }

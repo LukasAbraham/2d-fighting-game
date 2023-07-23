@@ -19,8 +19,10 @@ class Sprite {
             0,
             this.image.width / this.nframes,
             this.image.height,
-            this.position.x - this.offset.x, this.position.y - this.offset.y, 
-            (this.image.width / this.nframes) * this.scale, this.image.height * this.scale)
+            this.position.x - this.offset.x, 
+            this.position.y - this.offset.y, 
+            (this.image.width / this.nframes) * this.scale, 
+            this.image.height * this.scale)
     }     
 
     animateFrame() {
@@ -40,10 +42,37 @@ class Sprite {
     }
 }
 
+class Object {
+    constructor(position, {velocity, 
+        imageSrc, scale=1, offset={x: 0, y: 0}, exist=false}) {
+            this.position = position;
+            this.velocity = velocity;
+            this.image = new Image();
+            this.image.src = imageSrc;
+            this.scale = scale;
+            this.offset = offset;
+            this.height = this.image.height * this.scale;
+            this.width = this.image.width * this.scale;
+            this.exist = exist;
+    }
+    draw() {
+        c.drawImage(this.image, 
+            this.position.x, this.position.y, this.width, this.height)
+    }     
+    update() {
+        if (this.position.x <= 1024) {
+            this.draw()
+            this.position.x += this.velocity.x
+        } else {
+            this.position.x = 0
+        }
+    }
+}
+
 class Fighter extends Sprite {
     constructor(position, {velocity, 
     imageSrc, scale=1, nframes=1, offset={x: 0, y: 0}, sprites,
-    attackBox = {offset: {}, width: undefined, height: undefined}, hitPoint}, flip) {
+    attackBox = {offset: {}, width: undefined, height: undefined}, hitPoint, hasObject=false, object=null}, flip) {
         super(position, {
             imageSrc, 
             scale, 
@@ -52,7 +81,7 @@ class Fighter extends Sprite {
         })
         this.velocity = velocity;
         this.height = 150;
-        this.width = 50;
+        this.width = 70;
         this.attackBox = {
             position: {
                 x: this.position.x,
@@ -72,6 +101,8 @@ class Fighter extends Sprite {
         this.hitPoint = hitPoint;
         this.flip = flip;
         this.dead = false;
+        this.hasObject = hasObject;
+        this.object = object;
 
         for (const sprite in this.sprites) {
             sprites[sprite].image = new Image()
@@ -118,6 +149,9 @@ class Fighter extends Sprite {
         // draw attack box region
         // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
 
+        // draw take hit region
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+
         if(this.position.x + this.velocity.x >= 0 && this.position.x + this.velocity.x <= canvas.width - 55)
             this.position.x += this.velocity.x;
         if(this.position.y + this.velocity.y > 0) {
@@ -135,8 +169,21 @@ class Fighter extends Sprite {
     }
 
     attack() {
-        this.switchSprite('attack1')
-        this.isAttacking = true;
+        if(!this.hasObject) {
+            this.switchSprite('attack1')
+            this.isAttacking = true;
+        } else {
+            this.object = new Object({
+                x: this.position.x,
+                y: this.position.y
+            }, {velocity: {
+                x: 1,
+                y: 0
+            },
+            imageSrc: './asset/characters/Huntress 2/Static.png',
+            scale: 2.9,
+            exist: true})
+        }
     }
 
     takeHit() {

@@ -5,6 +5,8 @@ canvas.width = 1024;
 canvas.height = 576;
 c.fillRect(0, 0, canvas.width, canvas.height)
 
+var test = false
+
 const gravity = 0.7
 
 const background = new Sprite({
@@ -60,10 +62,18 @@ function animate() {
     c.fillRect(0, 0, canvas.width, canvas.height);
     background.update();
     shop.update();
+
+    // blurring background
     // c.fillStyle = 'rgba(255, 255, 255, 0.1)';
     // c.fillRect(0, 0, canvas.width, canvas.height);
 
     player.update();
+    if(player.hasObject && test) {
+        if(player.object.exist) {
+            player.object.update()
+            console.log(player.object)
+        }
+    }
     enemy.update();
     player.velocity.x = 0;
     enemy.velocity.x = 0;
@@ -131,7 +141,6 @@ function animate() {
 
     if(enemy.health <= 0 || player.health <= 0){
         determineWinner({ player, enemy, timerId })
-        setTimeout(() => { window.location.href = 'index.html'; }, 5000);
     }
 }
 
@@ -152,6 +161,8 @@ window.addEventListener('keydown', (event) => {
                 player.velocity.y = -15;
                 break;
             case ' ':
+                if(player.hasObject)
+                    test = true;
                 player.attack();
                 break;
     

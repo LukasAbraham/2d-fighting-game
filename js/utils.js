@@ -15,6 +15,12 @@ function determineWinner({player, enemy, timerId}) {
     } else {
         document.querySelector('#displayResult').innerHTML = 'PLAYER 2 WINS'
     }
+    document.querySelector('#subDisplay').innerHTML = 'Press Enter to continue'
+    window.addEventListener('keydown', event => {
+        if(event.key === 'Enter') {
+            window.location.href = 'index.html';
+        }
+    })
 }
 
 let timer = 60
@@ -26,6 +32,9 @@ function decreaseTimer() {
         document.querySelector('#timer').innerHTML = timer;
     }
 
-    if(timer === 0)
+    if(timer === 0) {
         determineWinner({player, enemy})
+        player.dead = true;
+        enemy.dead = true;
+    }
 }

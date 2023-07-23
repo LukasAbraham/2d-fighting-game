@@ -75,7 +75,7 @@ const characters = {
         scale: 2.5,
         nframes: 4,
         offset: {
-            x: 215,
+            x: 270,
             y: 169
         },
         sprites: {
@@ -110,7 +110,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 70,
+                x: 18,
                 y: 50
             },
             width: 170,
@@ -128,7 +128,7 @@ const characters = {
         scale: 2.5,
         nframes: 8,
         offset: {
-            x: 215,
+            x: 280,
             y: 266
         },
         sprites: {
@@ -163,7 +163,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 130,
+                x: 72,
                 y: -10
             },
             width: 238,
@@ -234,7 +234,7 @@ const characters = {
         scale: 2.7,
         nframes: 8,
         offset: {
-            x: 215,
+            x: 200,
             y: 123
         },
         sprites: {
@@ -269,7 +269,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 15,
+                x: 40,
                 y: 60
             },
             width: 150,
@@ -287,7 +287,7 @@ const characters = {
         scale: 3,
         nframes: 10,
         offset: {
-            x: 215,
+            x: 205,
             y: 90
         },
         sprites: {
@@ -322,7 +322,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -20,
+                x: -10,
                 y: 50
             },
             width: 133,
@@ -340,7 +340,7 @@ const characters = {
         scale: 2.5,
         nframes: 11,
         offset: {
-            x: 215,
+            x: 208,
             y: 133
         },
         sprites: {
@@ -375,7 +375,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 45,
+                x: 55,
                 y: 50
             },
             width: 176,
@@ -446,7 +446,7 @@ const characters = {
         scale: 2.5,
         nframes: 10,
         offset: {
-            x: 215,
+            x: 130,
             y: 54
         },
         sprites: {
@@ -481,7 +481,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -20,
+                x: 68,
                 y: 80
             },
             width: 115,
@@ -499,7 +499,7 @@ const characters = {
         scale: 3,
         nframes: 10,
         offset: {
-            x: 215,
+            x: 240,
             y: 105
         },
         sprites: {
@@ -534,7 +534,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 20,
+                x: -3,
                 y: 50
             },
             width: 133,
@@ -552,7 +552,7 @@ const characters = {
         scale: 2.8,
         nframes: 11,
         offset: {
-            x: 215,
+            x: 162,
             y: 81
         },
         sprites: {
@@ -587,7 +587,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 0,
+                x: 54,
                 y: 70
             },
             width: 118,
@@ -605,7 +605,7 @@ const characters = {
         scale: 2.9,
         nframes: 10,
         offset: {
-            x: 215,
+            x: 175,
             y: 42
         },
         sprites: {
@@ -646,7 +646,8 @@ const characters = {
             width: 176,
             height: 50,
         },
-        hitPoint: 0
+        hitPoint: 0,
+        hasObject: true
     },
     
     immortal_king : {
@@ -658,7 +659,7 @@ const characters = {
         scale: 2.5,
         nframes: 8,
         offset: {
-            x: 215,
+            x: 172,
             y: 110
         },
         sprites: {
@@ -693,7 +694,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -170,
+                x: -127,
                 y: 50
             },
             width: 350,
@@ -711,7 +712,7 @@ const characters = {
         scale: 1.8,
         nframes: 6,
         offset: {
-            x: 215,
+            x: 153,
             y: 57
         },
         sprites: {
@@ -746,7 +747,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -70,
+                x: -6,
                 y: 30
             },
             width: 125,
@@ -764,7 +765,7 @@ const characters = {
         scale: 1.3,
         nframes: 9,
         offset: {
-            x: 215,
+            x: 135,
             y: 93
         },
         sprites: {
@@ -799,7 +800,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -20,
+                x: 63,
                 y: 10
             },
             width: 110,
@@ -817,7 +818,7 @@ const characters = {
         scale: 1.5,
         nframes: 6,
         offset: {
-            x: 215,
+            x: 193,
             y: 60
         },
         sprites: {
@@ -852,7 +853,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -20,
+                x: 10,
                 y: 30
             },
             width: 130,
