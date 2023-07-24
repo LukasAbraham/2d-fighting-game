@@ -85,7 +85,9 @@ class Fighter extends Sprite {
             attackBox = { offset: {}, width: undefined, height: undefined },
             hitPoint,
             rangedWeapon = false,
-            subWeaponSrc = undefined },
+            objectType = undefined,
+            damage = 8,
+            health = 100 },
         flip) {
         super(position, {
             imageSrc,
@@ -106,23 +108,37 @@ class Fighter extends Sprite {
             height: attackBox.height,
         }
         this.lastKey;
-        this.isAttacking;
-        this.health = 100;
+        this.health = health;
         this.currentFrame = 0;
         this.framesElapsed = 0;
         this.framesHold = 8;
         this.sprites = sprites;
-        this.hitPoint = hitPoint;
         this.flip = flip;
         this.dead = false;
+        this.damage = damage;
+        // properties for close ranged weapon characters
+        this.isAttacking;
+        this.hitPoint = hitPoint;
+        // properties for rangedWeapon characters
         this.rangedWeapon = rangedWeapon;
         this.object = [];
         this.fired = false;
-        this.subWeaponSrc = subWeaponSrc;
+        this.objectType = objectType;
 
         for (const sprite in this.sprites) {
             sprites[sprite].image = new Image()
             sprites[sprite].image.src = sprites[sprite].imageSrc
+        }
+
+        if (flip) {
+            this.offset.x += this.width 
+        }
+
+        if(rangedWeapon) {
+            this.object.push(new Object({
+                x: this.position.x,
+                y: this.position.y
+            }, this.objectType, this.flip))
         }
     }
 
@@ -155,21 +171,46 @@ class Fighter extends Sprite {
         if (!this.dead)
             this.animateFrame();
 
-        if (this.flip) {
-            this.attackBox.position.x = this.position.x - this.attackBox.offset.x - this.attackBox.width;
+        if(this.rangedWeapon) {
+            if (this.image === this.sprites.attack1.image && this.currentFrame === this.sprites.attack1.nframes - 1) {
+                this.object.push(new Object({
+                    x: this.position.x,
+                    y: this.position.y
+                }, this.objectType, this.flip));
+            }
+            // animation for ranged weapon
+            for (let i = 1; i < this.object.length; i++) {
+                this.object[i].update()
+                
+                // draw attack box of ranged weapon
+                // if(this.flip) {
+                //     c.strokeRect(this.object[i].position.x - this.object[i].offset.x, this.object[i].position.y + this.object[i].offset.y, -this.object[i].width, this.object[i].height)
+                // } else {
+                //     c.strokeRect(this.object[i].position.x + this.object[i].offset.x, this.object[i].position.y + this.object[i].offset.y, this.object[i].width, this.object[i].height)
+                // }
+
+                if(this.object[i].position.x > canvas.width || this.object[i].position.x < 0)
+                    this.object.splice(i, 1)
+            }
         } else {
-            this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+            if (this.flip) {
+                this.attackBox.position.x = this.position.x - this.attackBox.offset.x - this.attackBox.width + this.width;
+            } else {
+                this.attackBox.position.x = this.position.x + this.attackBox.offset.x;
+            }
+            this.attackBox.position.y = this.position.y + this.attackBox.offset.y
         }
-        this.attackBox.position.y = this.position.y + this.attackBox.offset.y
 
         // draw attack box region
+        // c.fillStyle = 'rgba(255, 255, 0, 0.2)'
         // c.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height)
-
         // draw take hit region
+        // c.fillStyle = 'rgba(0, 255, 255, 0.3)'
         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
         if (this.position.x + this.velocity.x >= 0 && this.position.x + this.velocity.x <= canvas.width - 55)
             this.position.x += this.velocity.x;
+
         if (this.position.y + this.velocity.y > 0) {
             this.position.y += this.velocity.y;
         } else {
@@ -182,45 +223,19 @@ class Fighter extends Sprite {
         }
         else
             this.velocity.y += gravity
-        // animation for ranged weapon
-        if (this.rangedWeapon && this.fired) {
-            for (let i = 0; i < this.object.length; i++) {
-                this.object[i].update()
-                if(this.object[i].position.x > canvas.width || this.object[i].position.x < 0)
-                    this.object.splice(0, 1)
-            }
-        }
     }
 
     attack() {
         this.switchSprite('attack1')
         this.isAttacking = true;
-        if(this.rangedWeapon) {
-            this.object.push(new Object({
-                x: this.position.x,
-                y: this.position.y
-            }, {
-                velocity: {
-                    x: 8,
-                    y: 0
-                },
-                offset: {
-                    x: 0,
-                    y: 60
-                },
-                imageSrc: this.subWeaponSrc,
-                scale: 3
-            }, this.flip))
-        }
     }
 
-    takeHit() {
-        this.health -= 10;
+    takeHit(damage) {
+        this.health -= damage;
         if (this.health <= 0) {
             this.switchSprite('death')
         } else this.switchSprite('takeHit')
     }
-
 
     switchSprite(sprite) {
         if (this.image === this.sprites.death.image) {

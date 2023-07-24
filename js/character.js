@@ -75,7 +75,7 @@ const characters = {
         scale: 2.5,
         nframes: 4,
         offset: {
-            x: 270,
+            x: 215,
             y: 169
         },
         sprites: {
@@ -110,7 +110,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 18,
+                x: 70,
                 y: 50
             },
             width: 170,
@@ -181,7 +181,7 @@ const characters = {
         scale: 2.5,
         nframes: 8,
         offset: {
-            x: 215,
+            x: 160,
             y: 105
         },
         sprites: {
@@ -216,7 +216,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 0,
+                x: 60,
                 y: 50
             },
             width: 130,
@@ -234,7 +234,7 @@ const characters = {
         scale: 2.7,
         nframes: 8,
         offset: {
-            x: 200,
+            x: 190,
             y: 123
         },
         sprites: {
@@ -287,7 +287,7 @@ const characters = {
         scale: 3,
         nframes: 10,
         offset: {
-            x: 205,
+            x: 135,
             y: 90
         },
         sprites: {
@@ -322,7 +322,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -10,
+                x: 60,
                 y: 50
             },
             width: 133,
@@ -393,7 +393,7 @@ const characters = {
         scale: 2.5,
         nframes: 8,
         offset: {
-            x: 215,
+            x: 152,
             y: 90
         },
         sprites: {
@@ -414,8 +414,8 @@ const characters = {
                 nframes: 2
             },
             attack1: {
-                imageSrc: './asset/characters/Huntress/Attack2.png',
-                nframes: 5
+                imageSrc: './asset/characters/Huntress/Attack4.png',
+                nframes: 9
             },
             takeHit: {
                 imageSrc: './asset/characters/Huntress/Take hit.png',
@@ -428,13 +428,27 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -20,
-                y: 50
+                x: 0,
+                y: 0
             },
-            width: 120,
-            height: 80,
+            width: 0,
+            height: 0,
         },
-        hitPoint: 3
+        hitPoint: 0,
+        rangedWeapon: true,
+        damage: 5,
+        objectType: {
+            velocity: {
+                x: 6,
+                y: 0
+            },
+            offset: {
+                x: 20,
+                y: 80
+            },
+            imageSrc: './asset/characters/Huntress/Spear.png',
+            scale: 2.5
+        }
     },
     
     martial_hero : {
@@ -499,7 +513,7 @@ const characters = {
         scale: 3,
         nframes: 10,
         offset: {
-            x: 240,
+            x: 170,
             y: 105
         },
         sprites: {
@@ -534,7 +548,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -3,
+                x: 63,
                 y: 50
             },
             width: 133,
@@ -605,7 +619,7 @@ const characters = {
         scale: 2.9,
         nframes: 10,
         offset: {
-            x: 175,
+            x: 110,
             y: 42
         },
         sprites: {
@@ -640,15 +654,27 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -176,
-                y: 50
+                x: 0,
+                y: 0
             },
-            width: 176,
-            height: 50,
+            width: 0,
+            height: 0,
         },
         hitPoint: 0,
         rangedWeapon: true,
-        subWeaponSrc: './asset/characters/Huntress 2/Static.png'
+        damage: 7,
+        objectType: {
+            velocity: {
+                x: 7,
+                y: 0
+            },
+            offset: {
+                x: 0,
+                y: 63
+            },
+            imageSrc: './asset/characters/Huntress 2/Static.png',
+            scale: 3
+        }
     },
     
     immortal_king : {
@@ -713,7 +739,7 @@ const characters = {
         scale: 1.8,
         nframes: 6,
         offset: {
-            x: 153,
+            x: 85,
             y: 57
         },
         sprites: {
@@ -748,7 +774,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: -6,
+                x: 63,
                 y: 30
             },
             width: 125,
@@ -819,7 +845,7 @@ const characters = {
         scale: 1.5,
         nframes: 6,
         offset: {
-            x: 193,
+            x: 122,
             y: 60
         },
         sprites: {
@@ -854,7 +880,7 @@ const characters = {
         },
         attackBox: {
             offset: {
-                x: 10,
+                x: 80,
                 y: 30
             },
             width: 130,

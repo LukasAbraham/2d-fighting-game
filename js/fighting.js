@@ -105,30 +105,54 @@ function animate() {
     }
 
     // detect collision & enemy gets hit
-    if (rectangularCollision({ rectangle1: player, rectangle2: enemy }) && player.isAttacking && player.currentFrame === player.hitPoint) {
-        enemy.takeHit();
-        player.isAttacking = false;
-        gsap.to('#enemyHealth', {
-            width: enemy.health + '%'
-        })
+    if (player.rangedWeapon) {
+        for(let i = 1; i < player.object.length; i++) {
+            if(checkSuccessfulHit({ obj1: player.object[i], obj2: enemy })) {
+                enemy.takeHit(player.damage);
+                player.object.splice(i, 1);
+                player.isAttacking = false;
+                gsap.to('#enemyHealth', {
+                    width: enemy.health + '%'
+                })
+            }
+        }
+    } else {
+        if(checkSuccessfulHit({ obj1: player, obj2: enemy })) {
+            enemy.takeHit(player.damage);
+            player.isAttacking = false;
+            gsap.to('#enemyHealth', {
+                width: enemy.health + '%'
+            })
+        }
+        // if player misses
+        if (player.isAttacking && player.currentFrame === player.hitPoint) {
+            player.isAttacking = false
+        }
     }
 
-    // if player misses
-    if (player.isAttacking && player.currentFrame === player.hitPoint) {
-        player.isAttacking = false
-    }
-
-    if (rectangularCollision({ rectangle1: enemy, rectangle2: player }) && enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
-        player.takeHit();
-        enemy.isAttacking = false;
-        gsap.to('#playerHealth', {
-            width: player.health + '%'
-        })
-    }
-
-    // if player misses
-    if (enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
-        enemy.isAttacking = false
+    if(enemy.rangedWeapon) {
+        for(let i = 1; i < enemy.object.length; i++) {
+            if(checkSuccessfulHit({ obj1: enemy.object[i], obj2: player })) {
+                player.takeHit(enemy.damage);
+                enemy.object.splice(i, 1)
+                enemy.isAttacking = false;
+                gsap.to('#playerHealth', {
+                    width: player.health + '%'
+                })
+            }
+        }
+    } else {
+        if (checkSuccessfulHit({ obj1: enemy, obj2: player })) {
+            player.takeHit(enemy.damage);
+            enemy.isAttacking = false;
+            gsap.to('#playerHealth', {
+                width: player.health + '%'
+            })
+        }
+        // if enemy misses
+        if (enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
+            enemy.isAttacking = false
+        }
     }
 
     if (enemy.health <= 0 || player.health <= 0) {
@@ -154,10 +178,6 @@ window.addEventListener('keydown', (event) => {
                 break;
             case ' ':
                 player.attack();
-                if (player.rangedWeapon) {
-                    player.fired = true;
-                    // console.log(player.object.length)
-                }
                 break;
         }
     }
@@ -176,10 +196,6 @@ window.addEventListener('keydown', (event) => {
                 break;
             case '0':
                 enemy.attack();
-                if (enemy.rangedWeapon) {
-                    enemy.fired = true;
-                    // console.log(enemy.object.length)
-                }
                 break;
         }
     }
@@ -204,4 +220,3 @@ window.addEventListener('keyup', (event) => {
             break;
     }
 })
-
