@@ -2,7 +2,7 @@
 </hr>
 <h1>How to play?</h1>
 <ul>
-  <li>Live demo: <a href=""> 2D-fighting-game </a></li>
+  <li>Live demo: <a href="https://xthanh-2d-fighting-game.netlify.app"> 2D-fighting-game </a></li>
   <li>First player buttons: Choose your character using your mouse and submit your choice by pressing 'Space'
   <ul>
     <li> A: go left </li>
