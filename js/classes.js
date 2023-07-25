@@ -1,3 +1,7 @@
+// specify sound effects
+var takeHitSound = new Audio('./asset/sounds/takeHit.mp3')
+var attackSound = new Audio('./asset/sounds/hit-swing-sword.mp3')
+
 class Sprite {
     constructor(position, { imageSrc, scale = 1, nframes = 1, offset = { x: 0, y: 0 } }) {
         this.position = position;
@@ -226,11 +230,13 @@ class Fighter extends Sprite {
     }
 
     attack() {
-        this.switchSprite('attack1')
+        this.switchSprite('attack1');
         this.isAttacking = true;
+        attackSound.play();
     }
 
     takeHit(damage) {
+        takeHitSound.play();
         this.health -= damage;
         if (this.health <= 0) {
             this.switchSprite('death')
@@ -257,10 +263,17 @@ class Fighter extends Sprite {
                     this.currentFrame = 0;
                 }
                 break;
-            case 'run':
-                if (this.image !== this.sprites.run.image) {
-                    this.image = this.sprites.run.image;
-                    this.nframes = this.sprites.run.nframes;
+            case 'run_right':
+                if (this.image !== this.sprites.run_right.image) {
+                    this.image = this.sprites.run_right.image;
+                    this.nframes = this.sprites.run_right.nframes;
+                    this.currentFrame = 0;
+                }
+                break;
+            case 'run_left':
+                if (this.image !== this.sprites.run_left.image) {
+                    this.image = this.sprites.run_left.image;
+                    this.nframes = this.sprites.run_left.nframes;
                     this.currentFrame = 0;
                 }
                 break;

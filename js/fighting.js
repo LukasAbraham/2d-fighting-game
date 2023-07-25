@@ -11,17 +11,16 @@ const background = new Sprite({
     x: 0,
     y: 0
 }, {
-    imageSrc: './asset/background.png'
+    imageSrc: environments[map_idx].src
 })
 
-const shop = new Sprite({
-    x: 600,
-    y: 128
-}, {
-    imageSrc: './asset/shop.png',
-    scale: 2.75,
-    nframes: 6,
-})
+var animatedObject = null;
+if(environments[map_idx].animated) {
+    animatedObject = new Sprite(
+        environments[map_idx].component.position,
+        environments[map_idx].component.properties
+    )
+}
 
 const player = new Fighter({
     x: 0,
@@ -59,8 +58,8 @@ function animate() {
     c.fillStyle = 'black';
     c.fillRect(0, 0, canvas.width, canvas.height);
     background.update();
-    shop.update();
-
+    if(animatedObject)
+        animatedObject.update();
     // blurring background
     // c.fillStyle = 'rgba(255, 255, 255, 0.1)';
     // c.fillRect(0, 0, canvas.width, canvas.height);
@@ -73,10 +72,10 @@ function animate() {
     // player movement
     if (keys.a.pressed && player.lastKey === 'a') {
         player.velocity.x = -5;
-        player.switchSprite('run')
+        player.switchSprite('run_left')
     } else if (keys.d.pressed && player.lastKey === 'd') {
         player.velocity.x = 5;
-        player.switchSprite('run')
+        player.switchSprite('run_right')
     } else {
         player.switchSprite('idle');
     }
@@ -90,10 +89,10 @@ function animate() {
     // enemy movement
     if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5;
-        enemy.switchSprite('run')
+        enemy.switchSprite('run_left')
     } else if (keys.ArrowLeft.pressed && enemy.lastKey === 'ArrowLeft') {
         enemy.velocity.x = -5;
-        enemy.switchSprite('run')
+        enemy.switchSprite('run_right')
     } else {
         enemy.switchSprite('idle');
     }
@@ -104,56 +103,10 @@ function animate() {
         enemy.switchSprite('fall')
     }
 
-    // detect collision & enemy gets hit
-    if (player.rangedWeapon) {
-        for(let i = 1; i < player.object.length; i++) {
-            if(checkSuccessfulHit({ obj1: player.object[i], obj2: enemy })) {
-                enemy.takeHit(player.damage);
-                player.object.splice(i, 1);
-                player.isAttacking = false;
-                gsap.to('#enemyHealth', {
-                    width: enemy.health + '%'
-                })
-            }
-        }
-    } else {
-        if(checkSuccessfulHit({ obj1: player, obj2: enemy })) {
-            enemy.takeHit(player.damage);
-            player.isAttacking = false;
-            gsap.to('#enemyHealth', {
-                width: enemy.health + '%'
-            })
-        }
-        // if player misses
-        if (player.isAttacking && player.currentFrame === player.hitPoint) {
-            player.isAttacking = false
-        }
-    }
-
-    if(enemy.rangedWeapon) {
-        for(let i = 1; i < enemy.object.length; i++) {
-            if(checkSuccessfulHit({ obj1: enemy.object[i], obj2: player })) {
-                player.takeHit(enemy.damage);
-                enemy.object.splice(i, 1)
-                enemy.isAttacking = false;
-                gsap.to('#playerHealth', {
-                    width: player.health + '%'
-                })
-            }
-        }
-    } else {
-        if (checkSuccessfulHit({ obj1: enemy, obj2: player })) {
-            player.takeHit(enemy.damage);
-            enemy.isAttacking = false;
-            gsap.to('#playerHealth', {
-                width: player.health + '%'
-            })
-        }
-        // if enemy misses
-        if (enemy.isAttacking && enemy.currentFrame === enemy.hitPoint) {
-            enemy.isAttacking = false
-        }
-    }
+    // handle player's attack
+    handleHit(player, enemy);
+    // handle enemy's attack
+    handleHit(enemy, player);
 
     if (enemy.health <= 0 || player.health <= 0) {
         determineWinner({ player, enemy, timerId })

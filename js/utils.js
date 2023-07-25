@@ -33,7 +33,40 @@ function checkSuccessfulHit({obj1, obj2}) {
     }
 }
 
+function handleHit(attacker, defender) {
+    if (attacker.rangedWeapon) {
+      for (let i = 1; i < attacker.object.length; i++) {
+        if (checkSuccessfulHit({ obj1: attacker.object[i], obj2: defender })) {
+          defender.takeHit(attacker.damage);
+          attacker.object.splice(i, 1);
+          attacker.isAttacking = false;
+          gsap.to(`#${defender === player ? 'player' : 'enemy'}Health`, {
+            width: defender.health + '%',
+          });
+        }
+      }
+    } else {
+      if (checkSuccessfulHit({ obj1: attacker, obj2: defender })) {
+        defender.takeHit(attacker.damage);
+        attacker.isAttacking = false;
+        gsap.to(`#${defender === player ? 'player' : 'enemy'}Health`, {
+          width: defender.health + '%',
+        });
+      }
+      // if attacker misses
+      if (attacker.isAttacking && attacker.currentFrame === attacker.hitPoint) {
+        attacker.isAttacking = false;
+      }
+    }
+  }
+
+var endGameSound = new Audio('./asset/sounds/endGame.mp3');
+var soundPlay = false;
 function determineWinner({player, enemy, timerId}) {
+    if(!soundPlay) {
+        soundPlay = true;
+        endGameSound.play();
+    }
     clearTimeout(timerId);
     document.querySelector('#displayResult').style.display = 'flex' 
     if(player.health === enemy.health) {

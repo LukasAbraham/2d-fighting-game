@@ -32,7 +32,7 @@ a {
 }
 
 .sf-logo {
-  width: 600px;
+  width: 540px;
   margin: 1em auto;
   display: block;
 }
@@ -50,13 +50,13 @@ a {
   text-transform: uppercase;
   color: #dac751;
   letter-spacing: 0.1em;
-  text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.6);
+  text-shadow: 0px 5px 5px rgba(144, 13, 9, 0.6);
 }
 
 .select-container {
-  max-width: 950px;
+  max-width: 1050px;
   display: flex;
-  margin: 1em auto 3em;
+  margin: 1em auto 1em;
   flex-wrap: wrap;
   justify-content: space-between;
   background: rgba(0, 0, 0, 0.8);
@@ -221,4 +221,40 @@ a {
   100% {
     filter: brightness(150%);
   }
+}
+
+.background-select {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+#left-arrow,
+#right-arrow {
+  font-size: 70px;
+  padding: 10px;
+  cursor: pointer;
+  color: #dac751;
+  border: none;
+  margin: 10px;
+  transition: transform 0.2s;
+  background-color: transparent; 
+} 
+
+#left-arrow:hover,
+#right-arrow:hover {
+  color: crimson;
+} 
+
+#left-arrow:active,
+#right-arrow:active {
+  transform: scale(0.8);
+}
+
+#background-name {
+  font-size: 20px;
+  margin: 0 20px;
+  color: #01ffff;
+  text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.6);
 }

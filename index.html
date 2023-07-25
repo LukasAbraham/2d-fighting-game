@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - Street Fighter Character Select</title>
+  <title>Character Select</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
@@ -12,8 +12,7 @@
 
 <body>
   <!-- partial:index.partial.html -->
-  <div class="container"><img class="sf-logo"
-      src="../asset/KOF_logo.webp" />
+  <div class="container"><img class="sf-logo" src="../asset/KOF_logo.webp" />
     <h1 class="title"> <b>Player Select</b> </h1>
     <div class="select-container"><a class="character" data-name="samurai" rel="Samurai"><img class="character__img"
           src="../asset/characters/samurai.png" />
@@ -63,8 +62,22 @@
       </a><a class="character" data-name="wizard" rel="Wizard"><img class="character__img"
           src="../asset/characters/Wizard Pack.png" />
         <p class="character__name">Wizard</p>
+      </a><a class="character" data-name="medieval_thief" rel="Medieval Thief"><img class="character__img"
+          src="../asset/characters/MedievalWarrior2.png" />
+        <p class="character__name">Medieval Thief</p>
+      </a><a class="character" data-name="young_king" rel="Young King"><img class="character__img"
+          src="../asset/characters/MedievalWarrior.png" />
+        <p class="character__name">Young King</p>
       </a>
     </div>
+
+    <div class="background-select">
+      <button id="left-arrow">&lt;</button>
+      <span id="background-name"></span>
+      <button id="right-arrow">&gt;</button>
+    </div>
+
+    <h3 class="title"> <b>Press Enter to Continue</b> </h3>
   </div>
   <!-- Background song can be added below -->
   <!-- <audio autobuffer="autobuffer" autoplay="autoplay" loop="true">

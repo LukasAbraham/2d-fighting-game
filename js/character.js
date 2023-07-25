@@ -5,12 +5,15 @@ const urlParams = new URLSearchParams(queryString);
 // Get the values of p1 and p2 from the query parameters
 const p1 = urlParams.get('p1');
 const p2 = urlParams.get('p2');
+const p3 = urlParams.get('p3');
 
 // Use the p1 and p2 values to continue the game
 const player_idx = decodeURIComponent(p1)
 const enemy_idx = decodeURIComponent(p2)
+const map_idx = decodeURIComponent(p3)
 console.log(`Player 1 character: ${player_idx}`);
 console.log(`Player 2 character: ${enemy_idx}`);
+console.log(`Map selected: ${map_idx}`)
 
 const characters = {
     samurai : {
@@ -30,8 +33,12 @@ const characters = {
                 imageSrc: './asset/characters/samuraiMack/Idle.png', 
                 nframes: 8
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/samuraiMack/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/samuraiMack/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -83,8 +90,12 @@ const characters = {
                 imageSrc: './asset/characters/kenji/Idle.png', 
                 nframes: 4
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/kenji/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/kenji/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -136,8 +147,12 @@ const characters = {
                 imageSrc: './asset/characters/EVil Wizard 2/Idle.png', 
                 nframes: 8
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/EVil Wizard 2/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/EVil Wizard 2/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -181,7 +196,7 @@ const characters = {
         scale: 2.5,
         nframes: 8,
         offset: {
-            x: 160,
+            x: 150,
             y: 105
         },
         sprites: {
@@ -189,8 +204,12 @@ const characters = {
                 imageSrc: './asset/characters/Evil Wizard/Idle.png', 
                 nframes: 8
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Evil Wizard/Move.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Evil Wizard/Move_left.png',
                 nframes: 8
             },
             jump: {
@@ -242,8 +261,12 @@ const characters = {
                 imageSrc: './asset/characters/Fantasy Warrior/Idle.png', 
                 nframes: 10
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Fantasy Warrior/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Fantasy Warrior/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -295,8 +318,12 @@ const characters = {
                 imageSrc: './asset/characters/Free_Knight/_Idle.png', 
                 nframes: 10
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Free_Knight/_Run.png',
+                nframes: 10
+            },
+            run_left: {
+                imageSrc: './asset/characters/Free_Knight/_Run_left.png',
                 nframes: 10
             },
             jump: {
@@ -312,8 +339,8 @@ const characters = {
                 nframes: 6
             },
             takeHit: {
-                imageSrc: './asset/characters/Free_Knight/_Roll.png',
-                nframes: 12
+                imageSrc: './asset/characters/Free_Knight/TakeHit.png',
+                nframes: 4
             }, 
             death: {
                 imageSrc: './asset/characters/Free_Knight/_Death.png',
@@ -348,8 +375,12 @@ const characters = {
                 imageSrc: './asset/characters/Hero Knight/Idle.png', 
                 nframes: 11
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Hero Knight/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Hero Knight/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -390,19 +421,23 @@ const characters = {
             y: 0
         },
         imageSrc: './asset/characters/Huntress/Idle.png',
-        scale: 2.5,
+        scale: 2.8,
         nframes: 8,
         offset: {
-            x: 152,
-            y: 90
+            x: 172,
+            y: 123
         },
         sprites: {
             idle: {
                 imageSrc: './asset/characters/Huntress/Idle.png', 
                 nframes: 8
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Huntress/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Huntress/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -468,8 +503,12 @@ const characters = {
                 imageSrc: './asset/characters/Martial Hero 3/Idle.png', 
                 nframes: 10
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Martial Hero 3/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Martial Hero 3/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -521,8 +560,12 @@ const characters = {
                 imageSrc: './asset/characters/Medieval Warrior Pack 3/Idle.png', 
                 nframes: 10
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Medieval Warrior Pack 3/Run.png',
+                nframes: 6
+            },
+            run_left: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 3/Run_left.png',
                 nframes: 6
             },
             jump: {
@@ -574,8 +617,12 @@ const characters = {
                 imageSrc: './asset/characters/Hero Knight 2/Idle.png', 
                 nframes: 11
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Hero Knight 2/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Hero Knight 2/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -627,8 +674,12 @@ const characters = {
                 imageSrc: './asset/characters/Huntress 2/Idle.png', 
                 nframes: 10
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Huntress 2/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Huntress 2/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -694,8 +745,12 @@ const characters = {
                 imageSrc: './asset/characters/Medieval King Pack 2/Idle.png', 
                 nframes: 8
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Medieval King Pack 2/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Medieval King Pack 2/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -747,8 +802,12 @@ const characters = {
                 imageSrc: './asset/characters/Medieval King Pack/Idle.png', 
                 nframes: 6
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Medieval King Pack/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Medieval King Pack/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -800,8 +859,12 @@ const characters = {
                 imageSrc: './asset/characters/Night_Bone/Idle.png', 
                 nframes: 9
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Night_Bone/Run.png',
+                nframes: 6
+            },
+            run_left: {
+                imageSrc: './asset/characters/Night_Bone/Run_left.png',
                 nframes: 6
             },
             jump: {
@@ -833,7 +896,7 @@ const characters = {
             width: 110,
             height: 130,
         },
-        hitPoint: 7
+        hitPoint: 9
     },
     
     wizard : {
@@ -853,8 +916,12 @@ const characters = {
                 imageSrc: './asset/characters/Wizard Pack/Idle.png', 
                 nframes: 6
             },
-            run: {
+            run_right: {
                 imageSrc: './asset/characters/Wizard Pack/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Wizard Pack/Run_left.png',
                 nframes: 8
             },
             jump: {
@@ -888,5 +955,178 @@ const characters = {
         },
         hitPoint: 5
     },
+
+    medieval_thief : {
+        velocity: {
+            x: 0,
+            y: 0
+        },
+        imageSrc: './asset/characters/Medieval Warrior Pack 2/Idle.png',
+        scale: 2.8,
+        nframes: 8,
+        offset: {
+            x: 172,
+            y: 115
+        },
+        sprites: {
+            idle: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Idle.png', 
+                nframes: 8
+            },
+            run_right: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Run_left.png',
+                nframes: 8
+            },
+            jump: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Jump.png',
+                nframes: 2
+            },
+            fall: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Fall.png',
+                nframes: 2
+            },
+            attack1: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Attack4.png',
+                nframes: 4
+            },
+            takeHit: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Take Hit - white silhouette.png',
+                nframes: 4
+            }, 
+            death: {
+                imageSrc: './asset/characters/Medieval Warrior Pack 2/Death.png',
+                nframes: 6
+            }
+        },
+        attackBox: {
+            offset: {
+                x: 72,
+                y: 30
+            },
+            width: 168,
+            height: 100,
+        },
+        hitPoint: 2
+    },
+
+    young_king : {
+        velocity: {
+            x: 0,
+            y: 0
+        },
+        imageSrc: './asset/characters/Medieval Warrior Pack/Idle.png',
+        scale: 1.8,
+        nframes: 6,
+        offset: {
+            x: 120,
+            y: 74
+        },
+        sprites: {
+            idle: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Idle.png', 
+                nframes: 6
+            },
+            run_right: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Run.png',
+                nframes: 8
+            },
+            run_left: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Run_left.png',
+                nframes: 8
+            },
+            jump: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Jump.png',
+                nframes: 2
+            },
+            fall: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Fall.png',
+                nframes: 2
+            },
+            attack1: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Attack1.png',
+                nframes: 4
+            },
+            takeHit: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Hit.png',
+                nframes: 3
+            }, 
+            death: {
+                imageSrc: './asset/characters/Medieval Warrior Pack/Death.png',
+                nframes: 9
+            }
+        },
+        attackBox: {
+            offset: {
+                x: 68,
+                y: 30
+            },
+            width: 140,
+            height: 75,
+        },
+        hitPoint: 2
+    },
 }
 
+const environments = {
+    "Oak Woods": {
+        animated: true,
+        src: './asset/environments/oak-woods.png',
+        component: {
+            position: {x: 600,
+                       y: 128},
+            properties: {imageSrc: './asset/environments/shop.png',
+                         scale: 2.75,
+                         nframes: 6}
+        }
+    },
+    "Red River": {
+        animated: false,
+        src: './asset/environments/red-river.png',
+    },
+    "Countryside": {
+        animated: false,
+        src: './asset/environments/countryside.png',
+    },
+    "Silent Hill": {
+        animated: true,
+        src: './asset/environments/silent-hill.png',
+        component: {
+            position: {x: 0,
+                       y: -60},
+            properties: {imageSrc: './asset/environments/rain30.png',
+                         scale: 2.5,
+                         nframes: 3}
+        }
+    },
+    "Dark Forest": {
+        animated: true,
+        src: './asset/environments/dark-forest.png',
+        component: {
+            position: {x: 0,
+                       y: -60},
+            properties: {imageSrc: './asset/environments/rain30.png',
+                         scale: 2.5,
+                         nframes: 3}
+        }
+    },
+    "Dragon Temple": {
+        animated: false,
+        src: './asset/environments/dragon-temple.png',
+    },
+    "Sacred Pagoda": {
+        animated: false,
+        src: './asset/environments/pagoda.png',
+    },
+    "Town": {
+        animated: false,
+        src: './asset/environments/town.png',
+    },
+    "Underworld": {
+        animated: false,
+        src: './asset/environments/underworld.png',
+    }
+}
