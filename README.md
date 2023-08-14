@@ -1,8 +1,7 @@
 # 2d-fighting-game
-<div style="display: flex; align-items: center;">
-  <img src="./asset/preview1.png" height=300px></img>
-  <img src="./asset/preview2.png" height=300px></img> 
-</div>
+| <img src="./asset/preview1.png" alt="Preview 1" height="250px"> | <img src="./asset/preview2.png" alt="Preview 2" height="250px"> |
+|:------------------------------------------------------------:|:------------------------------------------------------------:|
+| Character selection screen                                   | Fighting screen                                              |
 </hr>
 <h1>How to play?</h1>
 <ul>
