@@ -1,4 +1,18 @@
 # 2d-fighting-game
+<style>
+  .image-container {
+    display: flex;
+    align-items: center;
+  },
+  .image-container img {
+    max-width: 50%;
+    height: auto;
+  }
+</style>
+<div class=image-container>
+  <img src="./asset/preview1.png" height=300px></img>
+  <img src="./asset/preview2.png" height=300px></img> 
+</div>
 </hr>
 <h1>How to play?</h1>
 <ul>
